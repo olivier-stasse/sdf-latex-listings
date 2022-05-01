@@ -1,0 +1,154 @@
+%% Listings definition for SDF language
+%% SDF language reference: http://sdformat.org
+%% Author: Olivier Stasse <ostasse@laas.fr>
+%% Project home: https://github.com/ostasse/sdflang-latex-listings
+%% More specifically:
+%% - https://golang.org/ref/spec#Keywords
+%% - https://golang.org/ref/spec#Predeclared_identifiers
+
+\ProvidesFile{lstlangsdf.sty}
+             [2022/04/30 1.0 listings language file for SDF]
+\lst@definelanguage{SDF}{
+  % Keywords as defined in the language grammar
+  morekeywords=[1]{% http://sdformat.org/spec?ver=1.9&elem=sdf
+    sdf,version,world,model,actor,light%
+  },
+  % World 
+  morekeywords=[2]{% http://sdformat.org/spec?ver=1.9&elem=world
+    name,audio,device,wind,linear_velocity,include%
+    uri,static,placement_frame,pose,relative_to,rotation_format,degrees,plugin,%
+    name,filename,gravity, magnetic_field,%
+    atmostphere,type, temperature, pressure, temperature_gradient,%
+    gui, fullscreen, camera,name, view_controller,projection_type,track_visual,%
+    min_dist, max_dist, static, use_model_frame, xyz, inherit_yaw,%
+    physics, scene, light, frame, attached_to,%
+    road, width, point, material,%
+    spherical_coordinates, surface_model, world_frame_orientation, latitude_deg,%
+    longitude_deg,elevation, heading_deg,%
+    state, population, model_count, distribution, rows, cols, step,%
+    box, size, cylinder, radius, length,%
+  },
+  % Scene 
+  morekeywords=[3]{% http://sdformat.org/spec?ver=1.9&elem=scene
+    scene, ambient, background, sky, time, sunrise, sunset, clouds, speed,%
+    direction, humidity, mean_size,%
+    shadows, fog, color, type, start, end, density,%
+    grid, id, tension, waypoint, 
+  },
+  % State 
+  morekeywords=[4]{% http://sdformat.org/spec?ver=1.9&elem=state
+    world_name, sim_time, wall_time, real_time, iterations,%
+    insertions, cast_shadows, intensity, diffuse, specular,%
+    attenuation, range, linear, constant, quadratic,%
+    direction, spot, inner_angle, outer_angle, falloff,%
+    deletions, joint, angle, axis, scale,link, velocity,%
+    acceleration, wrench,
+  },
+  % Physics
+  morekeywords=[5]{% http://sdformat.org/spec?ver=1.9&elem=physics
+    default, max_step_size, real_time_factor, real_time_update_rate,%
+    max_contacts, dart, solver, solver_type, collision_detector,%
+    simbody, min_step_size, accuracy, max_transient_velocity,%
+    contact, stiffness, dissipation, plastic_coef_restitution,%
+    plastic_impact_velocity, static_friction, dynamic_friction,%
+    viscous_friction, override_impact_capture_velocity,%
+    override_stiction_transition_velocity,%
+    bullet, iters, sor, constraints, cfm, erp,%
+    contact_surface_layer, split_impulse, split_impulse_penetration_threshold,%
+    ode@<, solver, island_threads, precon_iters, thread_position_correction,
+    use_dynamic_moi_rescaling, friction_model,%
+    contact_max_correcting_vel, contact_surface_layer%
+  },
+  % Light all keywords were declared before
+  % Actor
+  morekeywords=[6]{% http://sdformat.org/spec?ver=1.9&elem=actor
+    skin, animation, interpolate_x, script, loop, delay_start,%
+    auto_start, trajectory, 
+  },
+  % Model
+  morekeywords=[7]{% http://sdformat.org/spec?ver=1.9&elem=model
+    canonical_link, placement_frame, self_collide, allow_auto_disable,%
+    merge, enable_wind, gripper, grasp_check, detach_steps, attach_steps,%
+    min_contact_count, gripper_link, palm_link%
+  },
+  % Link
+  morekeywords=[8]{% http://sdformat.org/spec?ver=1.9&elem=link
+    kinematic, must_be_base_link, velocity_decay, angular, inertial,%
+    mass, inertia, ixx, ixy, ixz, iyy, iyz, izz, collision, visual, sensor,%
+    projector, texture, fov, near_clip, far_clip, audio_sink, audio_source,%
+    pitch, gain, battery, voltage, particle_emitter, emitting, duration,%
+    particle_size, lifetime, rate, min_velocity, max_velocity, scale_rate,%
+    color_start, color_end, color_range_image, topic, particle_scatter_ratio,%
+    shader, normal_map, render_order, lighting, emissive, double_sided, pbr,%
+    metal, albedo_map, roughness_map, roughness, metalness_map, metalness,%
+    environment_map, ambient_occlusion_map, normal_map, emissive_map,%
+    light_map, uv_set, specular_map, glossiness_map, glossiness,%
+  },
+  % Sensor
+  morekeywords=[9]{% http://sdformat.org/spec?ver=1.9&elem=sensor
+    always_on, visualize, enable_metrics, air_pressure, reference_altitude,%
+    pressure, noise, mean, stddev, bias_mean, bias_stddev, dynamic_bias_stddev,%
+    dynamic_bias_correlation_time, precision, altimeter, vertical_position,%
+    vertical_velocity, camera, horizontal_fov, image, width, height, format,%
+    clip, near, far, save, enabled, path, depth_camera, output,%
+    segmentation_type, box_type, distortion, k1, k2, k3, p1, p2, center,%
+    lens, type, scale_to_hfov, custom_function, c1, c2, c3, f, fun,%
+    cutoff_angle, env_texture_size, intrinsics, fx, fy, cx, cy, s,%
+    visibility_mask, force_torque, measure_direction, force, x, y, z, torque,%
+    gps, position_sensing, horizontal, vertical, velocity_sensing,%
+    imu, orientation_reference_frame, localization, custom_rpy, parent_frame,%
+    grav_dir_x, angular_velocity, linear_acceleration, enable_orientation, %
+    lidar, scan, samples, resolution, min_angle, max_angle, logical_camera, %
+    aspect_ratio, magnetometer, navsat, ray, rfidtag, rfid, sonar,%
+    transceiver, essid, frequency, min_frequency, max_frequency, power,%
+    sensitivity
+  },
+  % Joint
+  morekeywords=[10]{% http://sdformat.org/spec?ver=1.9&elem=joint
+    parent, child, gearbox_ratio, gearbox_reference_body, thread_pitch,%
+    expressed_in, dynamics, damping, friction, spring_reference, %
+    spring_stiffness, limit, lower, upper, effort, velocity, stiffness,
+    dissipation, axis2, must_be_loop_joint, cfm_damping, implicit_spring_damper,%
+    fudge_factor, bounce, max_force, suspension, provide_feedback 
+  },
+  % Collision
+  morekeywords=[11]{% http://sdformat.org/spec?ver=1.9&elem=collision
+    laser_retro, geometry, surface, restitution_coefficient, threshold,%
+    torsional, coefficient, use_patch_radius, patch_radius, surface_radius,
+    slip, mu, mu2, fdir1, slip1, slip2, bullet, friction2, rolling_friction,%
+    collide_without_contact, collide_without_contact_bitmask, collide_bitmask,%
+    category_bitmask, poisson_ratio, elastic_modulus, soft_cfm, soft_erp,%
+    kp, kd, max_vel, min_depth, split_impulse, %
+    split_impulse_penetration_threshold, soft_contact, bone_attachment, %
+    flesh_mass_fraction
+  },
+  % Visual
+  morekeywords=[12]{% http://sdformat.org/spec?ver=1.9&elem=visual
+    transparency, visibility_flags, meta, layer
+  },
+  % Material all keywords already included
+  % Geometry
+  morekeywords=[13]{% http://sdformat.org/spec?ver=1.9&elem=geometry
+    empty, capsule, ellipsoid, radii, heightmap, blend, min_height, %
+    fade_dist, use_terrain_paging, sampling, image, granularity, mesh,%
+    submesh, plane, polyline, sphere
+  },
+  % Pre-declared types
+  morekeywords=[3]{%
+    none, gaussian, gaussian_quantized,
+    bool,byte,complex64,complex128,error,float32,float64,%
+    int,int8,int16,int32,int64,rune,string,%
+    uint,uint8,uint16,uint32,uint64,uintptr},
+  % Constants and zero value
+  morekeywords=[4]{true,false,iota,nil},
+  % Strings : "foo", 'bar', `baz`
+  morestring=[b]{"},
+  morestring=[b]{'},
+  morestring=[b]{`},
+  % Comments : /* comment */ and // comment
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  % Options
+  sensitive=true
+}
+\endinput
