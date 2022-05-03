@@ -1,6 +1,6 @@
 # sdf-latex-listings
 
-A definition for the SDF language for LaTeX's listings mode.
+A Latex style file to have the SDF language available with the LaTeX's listings mode.
 
 ## Example
 
